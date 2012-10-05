@@ -1,0 +1,23 @@
+/*
+	Example CSS
+	by Scott Dunham
+	http://dnhmsctt.com
+*/
+
+*				{ margin:0; padding:0; }
+body			{ font:14px Georgia, serif; }
+
+header,
+section,
+footer			{ margin:15px auto; width:960px; }
+.robo-logo		{ /*display:block; margin:0 auto;*/ max-width:400px; }
+h1, h2, h3, h4	{ text-align:center; font-family: 'Wire One', sans-serif; }
+h1				{ font-size:45px; }
+h2				{ font-size:35px; }
+h3				{ font-size:25px; }
+.about-sec		{ display:inline-block; margin:5px 2px; padding:15px; width:280px; background:#ccc; border-radius:50px 0; }
+footer			{ text-align:center; font-style:italic; }
+
+.tweets			{ display:inline-block; background:#ccc; position:absolute; top:35px; width:300px; padding:15px; border-radius:25px; }
+.tweets:after 	{ content:""; position:absolute; border-width:20px 0px 0px 57px; border-style:solid; border-color:#CCC transparent; display:block; width:0; top:85px; left:-50px; }
+.tweet-attr		{ text-align:right; font-style:italic; margin-bottom:8px; }
