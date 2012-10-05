@@ -14,4 +14,4 @@ twit.search('bieber', {}, function(err, data) {
 var connect = require('connect');
 connect.createServer(
     connect.static('Vi-Char-Splash')
-).listen(80, '127.0.0.1');
+).listen(80, '0.0.0.0');
