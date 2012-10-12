@@ -9,7 +9,7 @@ var twit = new twitter({
 });
 
 io.sockets.on('connection', function(socket) {
-  twit.stream('statuses/filter', {'follow':'33607297'},
+  twit.stream('statuses/filter', {'track':'#nodejs'},
     function(stream) {
       stream.on('data',function(data){
         socket.emit('twitter',data);

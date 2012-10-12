@@ -20,4 +20,4 @@ io.sockets.on('connection', function(socket) {
 var connect = require('connect');
 connect.createServer(
     connect.static('Vi-Char-Splash')
-).listen(8124,'0.0.0.0');
+).listen(80,'0.0.0.0');
