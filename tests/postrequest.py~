@@ -9,7 +9,7 @@ def getState():
     req = urllib2.Request('http://localhost:1730/gameState.json')
     req.add_header('Content-Type', 'application/json')
     response = urllib2.urlopen(req)
-    print json.load(response)
+    print response
 	
     
 thisMessage = raw_input("Choose a message ")
