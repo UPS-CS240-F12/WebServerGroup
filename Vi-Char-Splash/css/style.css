@@ -7,18 +7,30 @@
 *				{ margin:0; padding:0; }
 body			{ font:14px Georgia, serif; }
 
-header,
+nav,
 section,
 footer			{ margin:15px auto; width:960px; }
-.robo-logo		{ max-width:300px; margin-left:25px; }
+nav				{ text-align:center; font-family:'Wire One', sans-serif; }
+.robo-logo		{ max-width:300px; margin-left:25px; float:left; }
 h1, h2, h3, h4	{ text-align:center; font-family: 'Wire One', sans-serif; }
-h1				{ font-size:45px; margin:15px 0; }
+h1				{ font-size:45px; margin:15px 0; clear:both; }
 h2				{ font-size:35px; }
 h3				{ font-size:25px; }
 ul li				{ margin-left:10px; }
+nav ul li			{ list-style-type:none; display:inline; }
+nav ul li a			{ font-size:45px; font-weight:bold; }
 .about-sec		{ display:inline-block; margin:5px 8px; padding:15px; width:270px; background:#ccc; border-radius:50px 0; box-shadow: 0 0 15px black; min-height:160px; vertical-align:top; }
 footer			{ text-align:center; font-style:italic; }
 
-.tweets			{ display:inline-block; background:#ccc; position:absolute; top:35px; width:435px; padding:15px; border-radius:25px; margin-left:50px; box-shadow: 0 8px 6px -3px #666; }
+.tweets			{ display:inline-block; background:#ccc; position:relative; top:20px; width:435px; padding:15px; border-radius:25px; margin-left:50px; box-shadow: 0 8px 6px -3px #666; }
 .tweets:after 	{ content:""; position:absolute; border-width:20px 0px 0px 57px; border-style:solid; border-color:#CCC transparent; display:block; width:0; top:165px; left:-50px; }
+.tweet-txt		{ text-align:left; }
 .tweet-attr		{ text-align:right; font-style:italic; margin-bottom:8px; }
+
+.turretLoc		{ text-align:center; min-height:25px; margin:10px; }
+.button			{ margin-bottom:10px; text-decoration:none; border:1px solid #dedede; border-right:1px solid #bbb; border-bottom:1px solid #bfbfbf; padding:5px 10px 6px 10px; cursor:pointer; font-size:15px; line-height:130%; color:#fff; -webkit-box-shadow:rgba(0,0,0,.15) 0px 1px 3px; -moz-box-shadow:rgba(0,0,0,.15) 0px 1px 3px; box-shadow:rgba(0,0,0,.15) 0px 1px 3px; -webkit-border-radius:11px; -moz-border-radius:11px; border-radius:11px; display:inline-block; overflow:visible; width:auto; }
+.button:hover	{ border:1px solid #999; color:#ccc; }
+.button:active	{ border-color:#ccc; background: #FFF; -webkit-box-shadow:none; -moz-box-shadow:none; box-shadow:none; }
+.button.robot	{ background:#1B818C; }
+.button.eye		{ background:#C73A29; }
+.vote			{ border:1px solid #000; width:432px; min-height:100px; display:inline-block; text-align:center; margin:0 10px; padding:10px; vertical-align:top; }
