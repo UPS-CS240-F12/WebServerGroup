@@ -19,10 +19,18 @@ http.createServer(function(req, res) {
 		});
 		req.on('end', function() {
 			console.log(body);
+			try {
+				parsed = JSON.parse(body);
+			} 
+			catch(e) {//error in JSON parsin'
+				res.writeHead(400, { //invalid request
+					'Content-Type' : 'text/plain'
+				});
+				res.end("Failed to parse JSON data! We recieved: \n\n"+body);
+			}
 			res.writeHead(200, { });
-			//This should be modified to return 200 on success and something else on failure.
 			res.end();
-			merge(gameState, JSON.parse(body))
+			merge(gameState, parsed)
 		});
 	} else if (req.method == 'GET') {
 		res.writeHead(200, {
