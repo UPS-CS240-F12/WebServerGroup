@@ -1,6 +1,11 @@
-var util = require('util'), url = require('url'), http = require('http'), qs = require('querystring'), io = require('socket.io');
+var util = require('util'), url = require('url'), http = require('http'), qs = require('querystring');
 
-io.listen(1234);
+
+/*var socketTest = require('socket.io');
+socketTest.listen(1234);
+socketTest.sockets.on('connection', function(socket) {
+	socket.emit('turretData','Just Testing');
+});*/
 
 //This merges all of the variables in B into A.
 //Used for our POST requests to change the gameState object.
@@ -27,10 +32,6 @@ http.createServer(function(req, res) {
 			//This should be modified to return 200 on success and something else on failure.
 			res.end();
 			merge(gameState, JSON.parse(body));
-			
-			io.sockets.on('connection', function(socket) {
-				socket.emit('turretData',gameState);
-			});
 		});
 	} else if (req.method == 'GET') {
 		res.writeHead(200, {

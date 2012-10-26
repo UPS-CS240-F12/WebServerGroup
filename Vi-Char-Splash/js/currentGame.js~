@@ -25,9 +25,5 @@
 				//Do nothing
 			}
 	    });
-$('.button.rtv').click(function() {
-			$('.vote .target').empty();
-			$('.vote').toggle();
-		});
 	});
 })(jQuery);

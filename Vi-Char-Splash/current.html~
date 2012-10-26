@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="http://10.150.2.55:1337/socket.io/socket.io.js"></script>
+	<script src="http://10.150.2.55:1234/socket.io/socket.io.js"></script>
 	<!-- <script type='text/javascript' src="js/example.js"></script> -->
 	<!-- <script src="http://localhost:1337/socket.io/socket.io.js"></script> -->
 	<script type='text/javascript' src="js/currentGame.js"></script>
@@ -26,19 +27,8 @@
 </nav>
 
 <section id="page">
-	<h1>Current Game Status:</h1>
-	<div class="status">
-		<h2>Robot</h2>
-		<p><strong>HP</strong>: <progress max="100" value="50"></progress></p>
-		<p><strong>EN</strong>: <progress max="100" value="75"></progress></p>
-	</div>
-	<div class="status">
-		<h2>Eyes</h2>
-		<p><strong>Fireballs Launched</strong>: 27</p>
-		<p><strong>Damage Done</strong>: 200</p>
-		<p><strong>Points</strong>: Eleventy Billion</p>
-	</div>
-	<a href="#" class="button rtv" onclick="return false;">Toggle RTV!</a><br />
+	<h1>Current Turret Location:</h1>
+	<p class="turretLoc">Turret Location Goes Here</p>
 	<div class="vote robot">
 		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23robot" target="_blank" class="button robot">Click to buff the robot!</a>
 		<div class="target"></div>
