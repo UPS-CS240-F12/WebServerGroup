@@ -13,8 +13,9 @@ def getState():
 	
     
 thisMessage = raw_input("Choose a message ")
+thisValue = raw_input("Choose a value ")
 if __name__=="__main__":
-    data = {'message' : thisMessage}
+    data = {thisMessage : thisValue}
     changeState(data)
     getState()
     #print "Hello World"

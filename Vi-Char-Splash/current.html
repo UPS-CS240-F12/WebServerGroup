@@ -27,6 +27,9 @@
 
 <section id="page">
 	<h1>Current Game Status:</h1>
+	<div class="status" id="json-div" style="width:100%;">
+		<p id="json-target">Holder text for JSON data...</p>
+	</div>
 	<div class="status">
 		<h2>Robot</h2>
 		<p><strong>HP</strong>: <progress max="100" value="50"></progress></p>
@@ -41,10 +44,12 @@
 	<a href="#" class="button rtv" onclick="return false;">Toggle RTV!</a><br />
 	<div class="vote robot">
 		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23robot" target="_blank" class="button robot">Click to buff the robot!</a>
+		<div  id="robotCount"></div>
 		<div class="target"></div>
 	</div>
 	<div class="vote eye">
 		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23eye" target="_blank" class="button eye">Click to buff the eyes!</a>
+		<div id="eyeCount"></div>
 		<div class="target"></div>
 	</div>
 </section>

@@ -37,10 +37,15 @@ http.createServer(function(req, res) {
 			merge(gameState, JSON.parse(body)); //Merge POSTed data with current gamestate.json
 		});
 	} else if (req.method == 'GET') {
-		res.writeHead(200, {
-		'Content-Type' : 'application/json'
-		});
-		res.end(JSON.stringify(gameState)); //return gameState.json
+		if(!callback){
+			res.writeHead(200, {
+			'Content-Type' : 'application/json'
+			});
+			res.end(JSON.stringify(gameState)); //return gameState.json
+		} else{
+			res.end(callback + '(' +JSON.stringify(gameState) + ')'); //return special
+		}
+		
 	}
 
 }).listen(4242, "0.0.0.0"); //Listen for POST/GET requests on port 4242
