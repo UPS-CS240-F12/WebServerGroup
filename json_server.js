@@ -1,4 +1,5 @@
 var util = require('util'), url = require('url'), http = require('http'), qs = require('querystring');
+var sim = require('./simulators.js')
 
 //This merges all of the variables in B into A.
 //Used for our POST requests to change the gameState object.
@@ -8,46 +9,62 @@ var merge = function(a, b) {
 	}
 	return a;
 }
-gameState = new Object()
-gameState.engine = new Object()
 
-gameState.engine.gameRunning = false
-//gameState.engine.lastUpdated = //?
-//gameState.engine.timeElapsed = //?
+function initGameState() {
+	var gameState = new Object()
+	gameState.engine = new Object()
 
-gameState.engine.turrets = new Object()
-gameState.engine.turretBullets = new Object()
+	gameState.engine.gameRunning = false
+	//gameState.engine.lastUpdated = //?
+	//gameState.engine.timeElapsed = //?
 
-gameState.engine.fireballs = new Object()
-gameState.engine.batteries = new Object()
+	gameState.engine.turrets = new Object()
+	gameState.engine.turretBullets = new Object()
 
-gameState.engine.player = new Object()
-gameState.engine.player.energy = 0
-gameState.engine.player.position = new Object()
-gameState.engine.player.position.x = 0.0
-gameState.engine.player.position.y = 0.0
-gameState.engine.player.position.z = 0.0
+	gameState.engine.fireballs = new Object()
+	gameState.engine.batteries = new Object()
 
-gameState.engine.eyeballs = new Object()
-gameState.engine.platforms = new Object()
-gameState.engine.platforms.rows = 0 //get from game group
-gameState.engine.platforms.columns = 0 //get from game group
-gameState.engine.platforms.deletedTiles = []
+	gameState.engine.player = new Object()
+	gameState.engine.player.energy = 0
+	gameState.engine.player.position = new Object()
+	gameState.engine.player.position.x = 0.0
+	gameState.engine.player.position.y = 0.0
+	gameState.engine.player.position.z = 0.0
 
-gameState.phones = new Object()
+	gameState.engine.eyeballs = new Object()
+	gameState.engine.platforms = new Object()
+	gameState.engine.platforms.rows = 0 //get from game group
+	gameState.engine.platforms.columns = 0 //get from game group
+	gameState.engine.platforms.deletedTiles = []
 
-gameState.web = new Object()
-gameState.web.twitter = new Object()
-gameState.web.twitter.activeEffect = "none"
-gameState.web.twitter.activeVote = new Object()
-gameState.web.twitter.activeVote.isActive = false
-gameState.web.twitter.activeVote.hashtags = ""//[#robotBuff,#eyeballBuff]
-gameState.web.twitter.activeVote.votes = new Object()
-gameState.web.twitter.activeVote.votes.robot = 0
-gameState.web.twitter.activeVote.votes.eye = 0
+	gameState.phones = new Object()
 
+	gameState.web = new Object()
+	gameState.web.twitter = new Object()
+	gameState.web.twitter.activeEffect = "none"
+	gameState.web.twitter.activeVote = new Object()
+	gameState.web.twitter.activeVote.isActive = false
+	gameState.web.twitter.activeVote.hashtags = ['#vichargame #robot','#vichargame #eye']
+	gameState.web.twitter.activeVote.votes = new Object()
+	gameState.web.twitter.activeVote.votes.robot = 0
+	gameState.web.twitter.activeVote.votes.eye = 0
+	return gameState
+}
+
+var mainGameState = initGameState()
+var phoneSimState = initGameState()
+var gameSimState = initGameState()
 
 http.createServer(function(req, res) {
+	if (req.url == '/phoneSim.json') { 
+		merge(phoneSimState,sim.phoneSim())
+		gameState = phoneSimState
+	}
+	else if (req.url == '/gameSim.json') {
+		merge(gameSimState,sim.gameSim())
+		gameState = gameSimState
+	}
+	else gameState = mainGameState
 	if (req.method == 'POST') {
 		var body = '';
 		req.on('data', function(data) {
