@@ -10,11 +10,13 @@ var phoneSim = {}
 phoneSim.phones = {}
 
 phoneSim.phones.yWVin = {}
+phoneSim.phones.yWVin.score = 0
 phoneSim.phones.yWVin.position = {}
 phoneSim.phones.yWVin.position.y = 5.0
 phoneSim.phones.yWVin.rotation = {'x' : 0.0, 'y' : 0.0, 'z' : 0.0}
 
 phoneSim.phones.CoiIc = {}
+phoneSim.phones.CoiIc.score = 0
 phoneSim.phones.CoiIc.position = {}
 phoneSim.phones.CoiIc.position.y = 7.0
 phoneSim.phones.CoiIc.rotation = {'x' : 0.0, 'y' : 0.0, 'z' : 0.0}

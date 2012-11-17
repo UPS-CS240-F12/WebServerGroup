@@ -71,7 +71,7 @@ http.createServer(function(req, res) {
 			var score = parseInt(query.score)
 			console.log("Score is:")
 			console.log(score)
-			if (gameState.phones[phone] != undefined && !isNaN(score)) {
+			if (gameState.phones[phone] != undefined && typeof score == 'number') {
 				if (gameState.phones[phone].score == undefined) {
 					gameState.phones[phone].score = 0
 				}
