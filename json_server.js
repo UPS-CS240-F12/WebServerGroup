@@ -5,7 +5,8 @@ var sim = require('./simulators.js')
 //Used for our POST requests to change the gameState object.
 var merge = function(a, b) {
 	for (var i in b) {
-		a[i] = b[i];
+		if (b[i] == null) delete a[i]
+		else a[i] = b[i];
 	}
 	return a;
 }
