@@ -22,13 +22,19 @@
 	$(document).ready(function() {
 	
 		//Turret JSON test
-		/*$.ajax({
+		$.ajax({
 			type: "GET",
-			dataType: "jsonp",
-			url: "http://puppetmaster.pugetsound.edu:4242/gameState.json"
+			dataType: "json",
+			url: "http://puppetmaster.pugetsound.edu:4242/gameState.json",
+			success: function( response ){
+				console.log( "SUCCESS:", response );
+			},
+			error: function( error ){
+				console.log( "ERROR:", error );
+			},
 		}).done(function(data){
-			alert(data);
-		});*/	
+			alert("Request Made!");
+		});	
 
 		//var $container = $('ul.tweets'),
 			//var socket = io.connect('http://10.150.2.55:1337');

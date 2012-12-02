@@ -66,6 +66,19 @@ http.createServer(function(req, res) {
 	}
 	else gameState = mainGameState
 	var query = url.parse(req.url, true).query
+	if (req.method.toUpperCase() === "OPTIONS"){
+		res.writeHead(
+			"204",
+			"No Content",
+		{
+			'Access-Control-Allow-Origin' : '*',
+			'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+			'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With, X-PINGOTHER'
+		});
+		//End the response - we're not sending back any content.
+		res.end();
+		return;
+	};
 	if (req.method == 'POST') {
 		if (query.phone != undefined && query.score != undefined) {
 			var phone = query.phone
@@ -77,7 +90,8 @@ http.createServer(function(req, res) {
 					gameState.phones[phone].score = 0
 				}
 				gameState.phones[phone].score += score
-				res.writeHead(200, {'Content-Type' : 'text/plain'});
+				res.writeHead(200, {'Content-Type' : 'application/json'});
+				res.write(JSON.stringify(gameState));
 				res.end()
 				return
 			}
@@ -100,15 +114,24 @@ http.createServer(function(req, res) {
 				});
 				res.end("Failed to parse JSON data! We recieved: \n\n"+body);
 			}
-			res.writeHead(200, { });
-			res.end();
+			//res.writeHead(200, { });
+			//res.end();
 			merge(gameState, parsed)
+			res.writeHead(200, {
+				'Content-Type' : 'application/json'
+			});
+			res.write(JSON.stringify(gameState));
+			res.end();
 		});
 	} else if (req.method == 'GET') {
 		res.writeHead(200, {
-			'Content-Type' : 'application/json'
+			'Content-Type' : 'application/json',
+			'Access-Control-Allow-Origin' : '*',
+			'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+			'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With, X-PINGOTHER'
 		});
-		res.end(JSON.stringify(gameState));
+		res.write(JSON.stringify(gameState));
+		res.end();
 	}
 
 }).listen(1730, "0.0.0.0");
