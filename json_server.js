@@ -20,6 +20,18 @@ var merge = function(a, b) {
 	return a;
 }
 
+var queryTwitter = function(){
+	var curDate = Date.now();
+	twit.search('#vichargame #robot', {}, function(err, data) {
+		var robotTweets = data;
+		console.log("Robot tweets as of " + curDate + " : " + robotTweets.results.length);
+	});
+
+	twit.search('#vichargame #eye', {}, function(err, data) {
+		var eyeTweets = data;
+		console.log("Eye tweets as of " + curDate + " : " + eyeTweets.results.length);
+	});
+};
 
 function initGameState() {
 	var gameState = new Object()
@@ -65,6 +77,7 @@ var phoneSimState = initGameState()
 var gameSimState = initGameState()
 
 http.createServer(function(req, res) {
+	setInterval(queryTwitter, 2000);
 	var path = url.parse(req.url, true).pathname
 	if (path == '/phoneSim.json') { 
 		merge(phoneSimState,sim.phoneSim())
