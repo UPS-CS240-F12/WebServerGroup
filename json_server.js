@@ -1,5 +1,14 @@
 var util = require('util'), url = require('url'), http = require('http'), qs = require('querystring');
 var sim = require('./simulators.js')
+var twitter = require('ntwitter');
+
+//Open connection to twitter API using @vichargame account
+var twit = new twitter({
+  consumer_key: 'WlX8QJIfRvo6HuIyW2QjZw',
+  consumer_secret: 'imhvULLCCBonnBfV8Vv9bz0lZKMMMQo5QLgE2gsaI',
+  access_token_key: '901061384-b0T9dTtfwpVE6l0WOHjQbHRrpzqz1D2vFi87j9eI',
+  access_token_secret: '8Iz4VcAlbd819rmUkqzMsbmXPM7AtcNPjTRjULZeEXc'
+});
 
 //This merges all of the variables in B into A.
 //Used for our POST requests to change the gameState object.
@@ -10,6 +19,7 @@ var merge = function(a, b) {
 	}
 	return a;
 }
+
 
 function initGameState() {
 	var gameState = new Object()
@@ -42,7 +52,7 @@ function initGameState() {
 	gameState.web.twitter = new Object()
 	gameState.web.twitter.activeEffect = "none"
 	gameState.web.twitter.activeVote = new Object()
-	gameState.web.twitter.activeVote.isActive = false
+	gameState.web.twitter.activeVote.isActive = true
 	gameState.web.twitter.activeVote.hashtags = ['#vichargame #robot','#vichargame #eye']
 	gameState.web.twitter.activeVote.votes = new Object()
 	gameState.web.twitter.activeVote.votes.robot = 0
