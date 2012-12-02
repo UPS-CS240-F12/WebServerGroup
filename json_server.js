@@ -14,7 +14,7 @@ var twit = new twitter({
 //Used for our POST requests to change the gameState object.
 var merge = function(a, b) {
 	for (var i in b) {
-		if (b[i] == null) delete a[i]
+		if (b[i] === null) delete a[i]
 		else a[i] = b[i];
 	}
 	return a;
