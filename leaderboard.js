@@ -1,8 +1,14 @@
 var mongodb = require("mongodb"),
 	mongoserver = new mongodb.Server("localhost", 27017, {'auto_reconnect' : true}), 
-	db_connector = new mongodb.Db("leaderboard", mongoserver, {safe : false});
+	db_connector = new mongodb.Db("leaderboard", mongoserver, {safe : false}),
+	mustache = require("mustache"),
+	fs = require("fs")
+	
+var html_template = fs.readFileSync("./templates/leaderboard.mustache").toString()
 
 var lb_collection
+
+
 
 db_connector.open(function(err, db) {
 	if (err) {
@@ -27,6 +33,19 @@ module.exports.getLeaders = function(callback) {
 	cursor.toArray(function(err, documents) {
 		if (err) return callback(err, null)
 		callback(null, documents)
+	})
+}
+
+/**
+ * Returns an HTML rendering of the current leaderboard.
+ * 
+ * @param {Object} callback (err, leaders) returns (err, null) on failure, (null, leaders) on success.
+ */
+module.exports.getLeadersHTML = function(callback) {
+	module.exports.getLeaders(function(err, leaders) {
+		if (err) return callback(err, null)
+		table = mustache.render(html_template, {leaders : leaders})
+		callback(null, table)
 	})
 }
 
