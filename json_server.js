@@ -186,7 +186,7 @@ http.createServer(function(req, res) {
 			 */
 			if (gameState.engine.gameRunning === true) gameStarted = true
 			else if (gameState.engine.gameRunning === false && gameStarted === true) {
-			    gameRunning = false
+			    gameStarted = false
 			    leaderboard.addLeaders(gameState, function(err) {
 			        if (err) console.log("Error updating leaderboard: " + err)
 			        else console.log("Leaderboard updated successfully.")
