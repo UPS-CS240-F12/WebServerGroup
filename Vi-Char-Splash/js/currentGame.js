@@ -21,11 +21,11 @@
 
 	$(document).ready(function() {
 	
-		//Turret JSON test
+		//JSON test
 		$.ajax({
 			type: "GET",
 			dataType: "json",
-			url: "http://puppetmaster.pugetsound.edu:4242/gameState.json",
+			url: "http://puppetmaster.pugetsound.edu:1730/gameState.json",
 			success: function( response ){
 				console.log( "SUCCESS:", response );
 			},
