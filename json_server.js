@@ -198,14 +198,43 @@ http.createServer(function(req, res) {
 			res.end();
 		});
 	} else if (req.method == 'GET') {
-		res.writeHead(200, {
-			'Content-Type' : 'application/json',
-			'Access-Control-Allow-Origin' : '*',
-			'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-			'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With, X-PINGOTHER'
-		});
-		res.write(JSON.stringify(gameState));
-		res.end();
+	    /**
+	     *  GET /leaderboard.json 
+	     * 
+	     *  Retrieves the overall leaderboard
+	     */
+	    if (path == "/leaderboard.json") {
+	        leaderboard.getLeaders(function (err, leaders) {
+	            if (err) {
+	                res.writeHead(500, {})
+	                res.end("Error retrieving leaderboard.")
+	            }
+                else {
+                    res.writeHead(200, {
+                        'Content-Type' : 'application/json',
+                        'Access-Control-Allow-Origin' : '*',
+                        'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+                        'Access-Control-Allow-Headers' : 'Content-Type, X-Requested-With, X-PINGOTHER'
+                    });
+                    res.write(JSON.stringify(leaders));
+                    res.end();
+                }
+
+	        })
+	    }
+	    /**
+	     * Everything else is treated as GET /gameState.json 
+	     */
+		else {
+    		res.writeHead(200, {
+    			'Content-Type' : 'application/json',
+    			'Access-Control-Allow-Origin' : '*',
+    			'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    			'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With, X-PINGOTHER'
+    		});
+    		res.write(JSON.stringify(gameState));
+    		res.end();
+		}
 	}
 
 }).listen(1730, "0.0.0.0");
