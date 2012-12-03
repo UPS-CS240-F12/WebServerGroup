@@ -16,6 +16,7 @@ var twit = new twitter({
 var merge = function(a, b) {
 	for (var i in b) {
 		if (b[i] === null) delete a[i]
+		else if (typeof a[i] == 'object' && typeof b[i] == 'object') merge(a[i], b[i])
 		else a[i] = b[i];
 	}
 	return a;

@@ -75,7 +75,7 @@ module.exports.addLeaders = function(gameState, callback) {
 	}
 	var engine = gameState.engine
 	var botScore = 0
-	var botName = "Robot Rock"
+	var botName = "NoName Robot"
 	if (engine.score) botScore = engine.score
 	if (engine.name) botName = engine.name
 	scoreList.push({type : "bot", name : botName, score : botScore})
