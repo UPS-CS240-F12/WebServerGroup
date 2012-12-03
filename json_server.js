@@ -105,7 +105,7 @@ var rockTheVote = function(){
 	}
 };
 
-setInterval(rockTheVote, 30000);
+setInterval(rockTheVote, 180000); //Toggles a twitter vote every 3 minutes
 
 http.createServer(function(req, res) {
 	var path = url.parse(req.url, true).pathname
