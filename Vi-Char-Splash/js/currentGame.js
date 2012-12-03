@@ -17,24 +17,40 @@
  	// console.log('ERROR: ' + e.message);
 	//});
 
+	var getKeys = function(obj){
+		var keys = [];
+		for(var key in obj){
+			keys.push(key);
+		}
+		return keys;
+	};
 	
+	var updatePage = function(){
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: "http://puppetmaster.pugetsound.edu:1730/gameState.json"
+		}).done(function(data){
+			//Update robot energy if needed
+			var newRoboEnergy = data.engine.player.energy;
+			var oldRoboEnergy = $("#robotEn").val();
+			if(newRoboEnergy != oldRoboEnergy){
+				$("#robotEn").val(newRoboEnergy);
+			}
+			
+			//Update list of phones if needed
+			var phoneKeys = getKeys(data.phones);
+			$("#phoneList").empty();
+			$.each(phoneKeys, function(index, value) { 
+				$("#phoneList").append("<p>" + value + "</p>");
+			});
+		});
+	};
 
 	$(document).ready(function() {
 	
 		//JSON test
-		$.ajax({
-			type: "GET",
-			dataType: "json",
-			url: "http://puppetmaster.pugetsound.edu:1730/gameState.json",
-			success: function( response ){
-				console.log( "SUCCESS:", response );
-			},
-			error: function( error ){
-				console.log( "ERROR:", error );
-			},
-		}).done(function(data){
-			alert("Request Made!");
-		});	
+		updatePage();
 
 		//var $container = $('ul.tweets'),
 			//var socket = io.connect('http://10.150.2.55:1337');
