@@ -80,6 +80,6 @@ module.exports.addLeaders = function(gameState, callback) {
 	scoreList.push({type : "bot", name : botName, score : botScore})
 	lb_collection.insert(scoreList, {safe: true}, function(err, records){
 		if (err) return callback(err)
-		console.log(records)
+		callback(null)
 	})
 }

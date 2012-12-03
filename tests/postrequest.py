@@ -12,10 +12,9 @@ def getState():
     response = urllib2.urlopen(req)
     print json.load(response)
 	
-    
-thisMessage = raw_input("Choose a message ")
-thisValue = raw_input("Choose a value ")
 if __name__=="__main__":
+    thisMessage = raw_input("Choose a message ")
+    thisValue = raw_input("Choose a value ")
     data = {thisMessage : thisValue}
     changeState(data)
     #getState()

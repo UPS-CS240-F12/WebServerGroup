@@ -1,6 +1,7 @@
 var util = require('util'), url = require('url'), http = require('http'), qs = require('querystring');
 var sim = require('./simulators.js')
 var twitter = require('ntwitter');
+var leaderboard = require("./leaderboard.js")
 
 //Open connection to twitter API using @vichargame account
 var twit = new twitter({
@@ -21,6 +22,7 @@ var merge = function(a, b) {
 }
 
 var voteActive = false;
+var gameStarted = false;
 
 function initGameState() {
 	var gameState = new Object()
@@ -133,6 +135,11 @@ http.createServer(function(req, res) {
 		return;
 	};
 	if (req.method == 'POST') {
+		/**
+		 * Scoring API.
+		 * 
+		 * Processes requests for POST gameState?phone=PHONE&score=SCORE 
+		 */
 		if (query.phone != undefined && query.score != undefined) {
 			var phone = query.phone
 			var score = parseInt(query.score)
@@ -152,6 +159,9 @@ http.createServer(function(req, res) {
 			res.end("Invalid request: "+req.url)
 			return
 		}
+		/**
+		 * General object-modification API. 
+		 */
 		var body = '';
 		req.on('data', function(data) {
 			body += data;
@@ -167,9 +177,20 @@ http.createServer(function(req, res) {
 				});
 				res.end("Failed to parse JSON data! We recieved: \n\n"+body);
 			}
-			//res.writeHead(200, { });
-			//res.end();
 			merge(gameState, parsed)
+			
+			/*
+			 * Leaderboard stuff here. If the game was running, but now is not, update
+			 * the leaderbboard with the new high scores.
+			 */
+			if (gameState.engine.gameRunning === true) gameStarted = true
+			else if (gameState.engine.gameRunning === false && gameStarted === true) {
+			    gameRunning = false
+			    leaderboard.addLeaders(gameState, function(err) {
+			        if (err) console.log("Error updating leaderboard: " + err)
+			        else console.log("Leaderboard updated successfully.")
+			    })
+			}
 			res.writeHead(200, {
 				'Content-Type' : 'application/json'
 			});
