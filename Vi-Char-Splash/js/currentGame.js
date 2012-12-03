@@ -31,6 +31,7 @@
 			dataType: "json",
 			url: "http://puppetmaster.pugetsound.edu:1730/gameState.json"
 		}).done(function(data){
+			console.log("Fetched the gameState data!");
 			//Update robot energy if needed
 			var newRoboEnergy = data.engine.player.energy;
 			var oldRoboEnergy = $("#robotEn").val();
@@ -44,13 +45,21 @@
 			$.each(phoneKeys, function(index, value) { 
 				$("#phoneList").append("<p>" + value + "</p>");
 			});
+
+			//Toggle vote section
+			var voteActive = data.web.twitter.activeVote.isActive;
+			if(voteActive){
+				$("#voteSection").show();
+			}else{
+				$("#voteSection").hide();
+			}
 		});
 	};
 
 	$(document).ready(function() {
 	
 		//JSON test
-		updatePage();
+		setInterval(updatePage,3000);
 
 		//var $container = $('ul.tweets'),
 			//var socket = io.connect('http://10.150.2.55:1337');

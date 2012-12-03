@@ -27,9 +27,6 @@
 
 <section id="page">
 	<h1>Current Game Status:</h1>
-	<div class="status" id="json-div" style="width:100%;">
-		<p id="json-target">Holder text for JSON data...</p>
-	</div>
 	<div class="status">
 		<h2>Robot</h2>
 		<p><strong>EN</strong>: <progress max="100" value="75" id="robotEn"></progress></p>
@@ -40,7 +37,7 @@
 			<!-- This is where we'll put the list of phones in the current game -->
 		</div>
 	</div>
-	<a href="#" class="button rtv" onclick="return false;">Toggle RTV!</a><br />
+	<div id="voteSection">
 	<div class="vote robot">
 		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23robot" target="_blank" class="button robot">Click to buff the robot!</a>
 		<div  id="robotCount"></div>
@@ -51,6 +48,7 @@
 		<div id="eyeCount"></div>
 		<div class="target"></div>
 	</div>
+</div>
 </section>
 
 <footer>
