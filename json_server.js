@@ -20,18 +20,7 @@ var merge = function(a, b) {
 	return a;
 }
 
-var queryTwitter = function(){
-	var curDate = Date.now();
-	twit.search('#vichargame #robot', {}, function(err, data) {
-		var robotTweets = data;
-		console.log("Robot tweets as of " + curDate + " : " + robotTweets.results.length);
-	});
-
-	twit.search('#vichargame #eye', {}, function(err, data) {
-		var eyeTweets = data;
-		console.log("Eye tweets as of " + curDate + " : " + eyeTweets.results.length);
-	});
-};
+var voteActive = false;
 
 function initGameState() {
 	var gameState = new Object()
@@ -64,7 +53,7 @@ function initGameState() {
 	gameState.web.twitter = new Object()
 	gameState.web.twitter.activeEffect = "none"
 	gameState.web.twitter.activeVote = new Object()
-	gameState.web.twitter.activeVote.isActive = true
+	gameState.web.twitter.activeVote.isActive = voteActive
 	gameState.web.twitter.activeVote.hashtags = ['#vichargame #robot','#vichargame #eye']
 	gameState.web.twitter.activeVote.votes = new Object()
 	gameState.web.twitter.activeVote.votes.robot = 0
@@ -76,8 +65,49 @@ var mainGameState = initGameState()
 var phoneSimState = initGameState()
 var gameSimState = initGameState()
 
+var queryTwitter = function(){
+	var curDate = Date.now();
+	var roboCount = 0;
+	var eyeCount = 0;
+	var robotDone = false;
+	var eyeDone = false;
+	twit.search('#vichargame #robot -RT', {}, function(err, data) {
+		robotDone = true;
+		var robotTweets = data;
+		roboCount = robotTweets.results.length;
+		twit.search('#vichargame #eye -RT', {}, function(err, data) {
+			eyeDone = true;
+			var eyeTweets = data;
+			eyeCount = eyeTweets.results.length;
+			console.log("Robot tweets as of " + curDate + " : " + roboCount);
+			gameState.web.twitter.activeVote.votes.robot = roboCount;
+			console.log("Eye tweets as of " + curDate + " : " + eyeCount);
+			gameState.web.twitter.activeVote.votes.eye = eyeCount;
+			if(roboCount > eyeCount){
+				gameState.web.twitter.activeEffect = "robotBuff";
+			}else if(roboCount < eyeCount){
+				gameState.web.twitter.activeEffect = "eyeballBuff";
+			}else{
+				gameState.web.twitter.activeEffect = "none";
+			}
+		});
+	});
+};
+
+var rockTheVote = function(){
+	voteActive = !voteActive;
+	gameState.web.twitter.activeVote.isActive = voteActive;
+	if(voteActive){
+		gameState.web.twitter.activeEffect = "none";
+	}
+	if(!voteActive){
+		setTimeout(queryTwitter, 5000);
+	}
+};
+
+setInterval(rockTheVote, 30000);
+
 http.createServer(function(req, res) {
-	setInterval(queryTwitter, 2000);
 	var path = url.parse(req.url, true).pathname
 	if (path == '/phoneSim.json') { 
 		merge(phoneSimState,sim.phoneSim())
