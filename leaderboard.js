@@ -69,7 +69,8 @@ module.exports.addLeaders = function(gameState, callback) {
 		var phone = phones[p_id]
 		var name = p_id
 		if (phone.name) name = phone.name
-		var score = phone.score
+		var score = 0
+		if (phone.score != undefined) score = phone.score
 		scoreList.push({type : "phone", phoneid : p_id, name : name, score : score})
 	}
 	var engine = gameState.engine
