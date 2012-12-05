@@ -172,6 +172,9 @@ http.createServer(function(req, res) {
                 if (err) console.log("Error updating leaderboard: " + err)
                 else console.log("Leaderboard updated successfully.")
             })
+            res.writeHead(204)
+            res.end()
+            return
 		}
 		/**
 		 * General object-modification API. 
