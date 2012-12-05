@@ -108,7 +108,7 @@ var rockTheVote = function(){
 	}
 };
 
-setInterval(rockTheVote, 180000); //Toggles a twitter vote every 3 minutes
+var voteInterval = setInterval(rockTheVote, 180000); //Toggles a twitter vote every 3 minutes
 
 http.createServer(function(req, res) {
 	var path = url.parse(req.url, true).pathname
@@ -159,6 +159,13 @@ http.createServer(function(req, res) {
 			res.writeHead(400, {'Content-Type' : 'text/plain'});
 			res.end("Invalid request: "+req.url)
 			return
+		}
+		if(query.restartGame != undefined){
+			voteActive = false;
+			gameStarted = false;
+			mainGameState = initGameState();
+			clearInterval(voteInterval);
+			voteInterval = setInterval(rockTheVote,180000);
 		}
 		/**
 		 * General object-modification API. 
