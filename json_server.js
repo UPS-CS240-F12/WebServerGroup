@@ -165,16 +165,18 @@ http.createServer(function(req, res) {
 			mainGameState = initGameState();
 			clearInterval(voteInterval);
 			voteInterval = setInterval(rockTheVote,180000);
-			/**
-			 * Leaderboard stuff here. 
-			 */
-            leaderboard.addLeaders(gameState, function(err) {
-                if (err) console.log("Error updating leaderboard: " + err)
-                else console.log("Leaderboard updated successfully.")
-            })
-            res.writeHead(204, {})
-            res.end()
-            return
+			if(query.logScores != undefined){
+				/**
+				 * Leaderboard stuff here. 
+				 */
+				leaderboard.addLeaders(gameState, function(err) {
+					if (err) console.log("Error updating leaderboard: " + err)
+					else console.log("Leaderboard updated successfully.")
+				});
+			}
+            res.writeHead(204, {});
+            res.end();
+            return;
 		}
 		/**
 		 * General object-modification API. 
