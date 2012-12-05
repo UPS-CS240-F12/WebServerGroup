@@ -8,9 +8,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script src="http://10.150.2.55:1337/socket.io/socket.io.js"></script>
-	<!-- <script type='text/javascript' src="js/example.js"></script> -->
-	<!-- <script src="http://localhost:1337/socket.io/socket.io.js"></script> -->
 	<script type='text/javascript' src="js/currentGame.js"></script>
 </head>
 
@@ -26,29 +23,31 @@
 </nav>
 
 <section id="page">
-	<h1>Current Game Status:</h1>
-	<div class="status">
-		<h2>Robot</h2>
-		<p><strong>EN</strong>: <progress max="5000" value="75" id="robotEn"></progress></p>
+	<div id="gameInactive" style="display:none;">
+		<h1>No Game Currently Being Played</h1>
 	</div>
-	<div class="status">
-		<h2>Eyes</h2>
-		<div id="phoneList">
-			<!-- This is where we'll put the list of phones in the current game -->
+	<div id="gameActive" style="display:none;">
+		<h1>Current Game Status:</h1>
+		<div class="status">
+			<h2>Robot</h2>
+			<p><strong>EN</strong>: <progress max="5000" value="75" id="robotEn"></progress></p>
+		</div>
+		<div class="status">
+			<h2>Eyes</h2>
+			<div id="phoneList">
+				<!-- This is where we'll put the list of phones in the current game -->
+			</div>
+		</div>
+		<div id="voteSection">
+			<p style="text-align:center;">Current twitter vote buff: "<span id="curBuff">none</span>"</p>
+			<div class="vote robot">
+				<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23robot" target="_blank" class="button robot">Click to buff the robot!</a>
+			</div>
+			<div class="vote eye">
+				<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23eye" target="_blank" class="button eye">Click to buff the eyes!</a>
+			</div>
 		</div>
 	</div>
-	<div id="voteSection">
-	<div class="vote robot">
-		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23robot" target="_blank" class="button robot">Click to buff the robot!</a>
-		<div  id="robotCount"></div>
-		<div class="target"></div>
-	</div>
-	<div class="vote eye">
-		<a href="https://twitter.com/intent/tweet?text=%23vichargame%20%23eye" target="_blank" class="button eye">Click to buff the eyes!</a>
-		<div id="eyeCount"></div>
-		<div class="target"></div>
-	</div>
-</div>
 </section>
 
 <footer>
