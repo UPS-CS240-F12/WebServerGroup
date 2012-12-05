@@ -23,7 +23,6 @@ var merge = function(a, b) {
 }
 
 var voteActive = false;
-var gameStarted = false;
 
 function initGameState() {
 	var gameState = new Object()
@@ -166,6 +165,13 @@ http.createServer(function(req, res) {
 			mainGameState = initGameState();
 			clearInterval(voteInterval);
 			voteInterval = setInterval(rockTheVote,180000);
+			/**
+			 * Leaderboard stuff here. 
+			 */
+            leaderboard.addLeaders(gameState, function(err) {
+                if (err) console.log("Error updating leaderboard: " + err)
+                else console.log("Leaderboard updated successfully.")
+            })
 		}
 		/**
 		 * General object-modification API. 
@@ -186,19 +192,6 @@ http.createServer(function(req, res) {
 				res.end("Failed to parse JSON data! We recieved: \n\n"+body);
 			}
 			merge(gameState, parsed)
-			
-			/*
-			 * Leaderboard stuff here. If the game was running, but now is not, update
-			 * the leaderbboard with the new high scores.
-			 */
-			if (gameState.engine.gameRunning === true) gameStarted = true
-			else if (gameState.engine.gameRunning === false && gameStarted === true) {
-			    gameStarted = false
-			    leaderboard.addLeaders(gameState, function(err) {
-			        if (err) console.log("Error updating leaderboard: " + err)
-			        else console.log("Leaderboard updated successfully.")
-			    })
-			}
 			res.writeHead(200, {
 				'Content-Type' : 'application/json'
 			});
