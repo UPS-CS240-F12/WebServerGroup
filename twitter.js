@@ -16,13 +16,12 @@ var twit = new twitter({
 });
 
 //Open WebSocket, on connection from client start streaming tweets which contain "#vichargame"
-io.sockets.on('connection', function(socket) {
-  twit.stream('statuses/filter', {'track':'#vichargame'},
-    function(stream) {
-      stream.on('data',function(data){
-        socket.emit('twitter',data); //Send tweet data to client when received
-      });
-    });
+//io.sockets.on('connection', function(socket) {});
+twit.stream('statuses/filter', {'track':'#vichargame'},
+	function(stream) {
+		stream.on('data',function(data){
+		io.emit('twitter',data); //Send tweet data to client when received
+	});
 });
 
 //Create server to serve out files in "Vi-Char-Splash" directory on port 80
