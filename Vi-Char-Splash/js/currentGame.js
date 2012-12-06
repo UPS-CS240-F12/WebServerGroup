@@ -41,9 +41,9 @@ var updatePage = function(){
 			//Toggle vote section
 			var voteActive = data.web.twitter.activeVote.isActive;
 			var newBuff = data.web.twitter.activeEffect;
-			var curBuff = $("curBuff").text();
+			var curBuff = $("#curBuff").text();
 			if(curBuff != newBuff){
-				$("curBuff").text(newBuff);
+				$("#curBuff").text(newBuff);
 			}
 			if(voteActive){
 				$(".vote").show();
