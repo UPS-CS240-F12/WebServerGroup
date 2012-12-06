@@ -26,7 +26,10 @@ footer			{ text-align:center; font-style:italic; }
 .about-sec *,
 table#Leaderboard tr td,
 select,
-option			{ color:#000; }
+option,
+input				{ color:#000; }
+
+.sorting		{ color:#fff; }
 
 .tweets			{ display:inline-block; background:#ccc; position:relative; top:20px; width:435px; min-height:250px; padding:15px; border-radius:25px; margin-left:50px; box-shadow: 0 8px 6px -3px #666; }
 .tweets:after 	{ content:""; position:absolute; border-width:20px 0px 0px 57px; border-style:solid; border-color:#CCC transparent; display:block; width:0; top:165px; left:-50px; }
