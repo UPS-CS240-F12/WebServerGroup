@@ -32,8 +32,6 @@ var K = function () {
 		//var $container = $('ul.tweets'),
 			var socket = io.connect('http://10.150.2.55:1337');
 			//template = $('#tweetTemplate');
-			
- 
 	    socket.on('twitter', function(data) {
 	        //$container.append(template.render(data));
 			//alert(data.text);
