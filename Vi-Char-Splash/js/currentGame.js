@@ -31,7 +31,7 @@ var updatePage = function(){
 			var phones = data.phones;
 			$("#phoneList").empty();
 			$.each(phones, function(i, val) {
-				if(val.screenName != undefined){
+				if(val.screenname != undefined){
 					$("#phoneList").append("<p id='" + i + "'>" + val.screenname + "</p>");
 				}
 				else{
