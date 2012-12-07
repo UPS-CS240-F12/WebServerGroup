@@ -32,7 +32,7 @@ var updatePage = function(){
 			$("#phoneList").empty();
 			$.each(phones, function(i, val) {
 				if(val.screenName != undefined){
-					$("#phoneList").append("<p id='" + i + "'>" + val.screenName + "</p>");
+					$("#phoneList").append("<p id='" + i + "'>" + val.screenname + "</p>");
 				}
 				else{
 					$("#phoneList").append("<p id='" + i + "'>" + i + "</p>");
