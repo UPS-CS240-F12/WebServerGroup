@@ -30,7 +30,9 @@ var updatePage = function(){
 			
 			//Update robot score if needed
 			var newRoboScore = data.engine.player.score;
+			if(newRoboScore == undefined){newRoboScore = 0;}
 			var oldRoboScore = $("#roboScore").text();
+			if(oldRoboScore == undefined){oldRoboScore = 0;}
 			if(newRoboScore != oldRoboScore){
 				$("#roboScore").text(newRoboScore);
 			}
@@ -42,10 +44,10 @@ var updatePage = function(){
 				var curPhoneScore = val.score;
 				if(curPhoneScore == undefined){curPhoneScore = 0;}
 				if(val.screenname != undefined){
-					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'>" + val.screenname + ", Score: " + curPhoneScore + "</p>");
+					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'><strong>" + val.screenname + "</strong> (" + curPhoneScore + " points)</p>");
 				}
 				else{
-					$("#phoneList").append("<p id='" + i + "'>" + i + ", Score: " + curPhoneScore + "</p>");
+					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'><strong>" + i + "</strong> (" + curPhoneScore + " points)</p>");
 				}
 			});
 			//Toggle vote section
