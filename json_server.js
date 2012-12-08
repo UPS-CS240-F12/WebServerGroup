@@ -160,11 +160,6 @@ http.createServer(function(req, res) {
 			return
 		}
 		if(query.restartGame != undefined){
-			voteActive = false;
-			gameStarted = false;
-			mainGameState = initGameState();
-			clearInterval(voteInterval);
-			voteInterval = setInterval(rockTheVote,180000);
 			if(query.logScores != undefined){
 				/**
 				 * Leaderboard stuff here. 
@@ -174,6 +169,11 @@ http.createServer(function(req, res) {
 					else console.log("Leaderboard updated successfully.")
 				});
 			}
+			voteActive = false;
+			gameStarted = false;
+			mainGameState = initGameState();
+			clearInterval(voteInterval);
+			voteInterval = setInterval(rockTheVote,180000);
             res.writeHead(204, {});
             res.end();
             return;
