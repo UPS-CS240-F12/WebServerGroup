@@ -27,15 +27,25 @@ var updatePage = function(){
 			if(newRoboEnergy != oldRoboEnergy){
 				$("#robotEn").val(newRoboEnergy);
 			}
+			
+			//Update robot score if needed
+			var newRoboScore = data.engine.player.score;
+			var oldRoboScore = $("#roboScore").text();
+			if(newRoboScore != oldRoboScore){
+				$("#roboScore").text(newRoboScore);
+			}
+			
 			//Update list of phones if needed
 			var phones = data.phones;
 			$("#phoneList").empty();
 			$.each(phones, function(i, val) {
+				var curPhoneScore = val.score;
+				if(curPhoneScore == undefined){curPhoneScore = 0;}
 				if(val.screenname != undefined){
-					$("#phoneList").append("<p id='" + i + "'>" + val.screenname + "</p>");
+					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'>" + val.screenname + ", Score: " + curPhoneScore + "</p>");
 				}
 				else{
-					$("#phoneList").append("<p id='" + i + "'>" + i + "</p>");
+					$("#phoneList").append("<p id='" + i + "'>" + i + ", Score: " + curPhoneScore + "</p>");
 				}
 			});
 			//Toggle vote section
