@@ -13,5 +13,5 @@ def getState():
     print json.load(response)
 	
 if __name__=="__main__":
-    data = {engine:{gameRunning:true}}
+    data = {"engine" : { "gameRunning" : "true"}}
     changeState(data)
