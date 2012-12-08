@@ -44,10 +44,10 @@ var updatePage = function(){
 				var curPhoneScore = val.score;
 				if(curPhoneScore == undefined){curPhoneScore = 0;}
 				if(val.screenname != undefined){
-					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'><strong>" + val.screenname + "</strong> (" + curPhoneScore + " points)</p>");
+					$("#phoneList").append("<p id='" + i + "'><strong>" + val.screenname + "</strong> (" + curPhoneScore + " points)</p>");
 				}
 				else{
-					$("#phoneList").append("<p style='text-align:left;' id='" + i + "'><strong>" + i + "</strong> (" + curPhoneScore + " points)</p>");
+					$("#phoneList").append("<p id='" + i + "'><strong>" + i + "</strong> (" + curPhoneScore + " points)</p>");
 				}
 			});
 			//Toggle vote section
