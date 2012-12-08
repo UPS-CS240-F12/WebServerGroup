@@ -174,7 +174,11 @@ http.createServer(function(req, res) {
 			mainGameState = initGameState();
 			clearInterval(voteInterval);
 			voteInterval = setInterval(rockTheVote,180000);
-            res.writeHead(204, {});
+            res.writeHead(204, {
+				'Access-Control-Allow-Origin' : '*'
+                'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers' : 'Content-Type, X-Requested-With, X-PINGOTHER'
+			});
             res.end();
             return;
 		}
