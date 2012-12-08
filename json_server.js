@@ -107,7 +107,7 @@ var rockTheVote = function(){
 	}
 };
 
-var voteInterval = setInterval(rockTheVote, 180000); //Toggles a twitter vote every 3 minutes
+var voteInterval = setInterval(rockTheVote, 90000); //Toggles a twitter vote every 90 seconds
 
 http.createServer(function(req, res) {
 	var path = url.parse(req.url, true).pathname
@@ -173,7 +173,7 @@ http.createServer(function(req, res) {
 			gameStarted = false;
 			mainGameState = initGameState();
 			clearInterval(voteInterval);
-			voteInterval = setInterval(rockTheVote,180000);
+			voteInterval = setInterval(rockTheVote,90000);
             res.writeHead(204, {
 				'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
