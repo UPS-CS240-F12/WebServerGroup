@@ -69,35 +69,55 @@ var mainGameState = initGameState()
 var phoneSimState = initGameState()
 var gameSimState = initGameState()
 
-var queryTwitter = function(){
+var queryTwitter = function(var isStart){
 	var curDate = Date.now();
 	var roboCount = 0;
 	var eyeCount = 0;
 	var robotDone = false;
 	var eyeDone = false;
-	twit.search('#vichargame #robot -RT', {}, function(err, data) {
-		robotDone = true;
-		var robotTweets = data;
-		roboCount = robotTweets.results.length;
-		twit.search('#vichargame #eye -RT', {}, function(err, data) {
-			eyeDone = true;
-			var eyeTweets = data;
-			eyeCount = eyeTweets.results.length;
-			console.log("Robot tweets as of " + curDate + " : " + roboCount);
-			gameState.web.twitter.activeVote.votes.robot = (roboCount - gameState.web.twitter.activeVote.votes.lastRobot);
-			gameState.web.twitter.activeVote.votes.lastRobot = roboCount;
-			console.log("Eye tweets as of " + curDate + " : " + eyeCount);
-			gameState.web.twitter.activeVote.votes.eye = (eyeCount - gameState.web.twitter.activeVote.votes.lastEye);
-			gameState.web.twitter.activeVote.votes.lastEye = eyeCount;
-			if(gameState.web.twitter.activeVote.votes.robot > gameState.web.twitter.activeVote.votes.eye){
-				gameState.web.twitter.activeEffect = "robotBuff";
-			}else if(gameState.web.twitter.activeVote.votes.robot < gameState.web.twitter.activeVote.votes.eye){
-				gameState.web.twitter.activeEffect = "eyeballBuff";
-			}else{
-				gameState.web.twitter.activeEffect = "none";
-			}
+	if(isStart == false){
+	
+		twit.search('#vichargame #robot -RT', {}, function(err, data) {
+			robotDone = true;
+			var robotTweets = data;
+			roboCount = robotTweets.results.length;
+			twit.search('#vichargame #eye -RT', {}, function(err, data) {
+				eyeDone = true;
+				var eyeTweets = data;
+				eyeCount = eyeTweets.results.length;
+				console.log("Robot tweets as of " + curDate + " : " + roboCount);
+				gameState.web.twitter.activeVote.votes.robot = (roboCount - gameState.web.twitter.activeVote.votes.lastRobot);
+				console.log("Eye tweets as of " + curDate + " : " + eyeCount);
+				gameState.web.twitter.activeVote.votes.eye = (eyeCount - gameState.web.twitter.activeVote.votes.lastEye);
+				if(gameState.web.twitter.activeVote.votes.robot > gameState.web.twitter.activeVote.votes.eye){
+					gameState.web.twitter.activeEffect = "robotBuff";
+				}else if(gameState.web.twitter.activeVote.votes.robot < gameState.web.twitter.activeVote.votes.eye){
+					gameState.web.twitter.activeEffect = "eyeballBuff";
+				}else{
+					gameState.web.twitter.activeEffect = "none";
+				}
+			});
 		});
-	});
+	
+	}
+	else{
+		twit.search('#vichargame #robot -RT', {}, function(err, data) {
+			robotDone = true;
+			var robotTweets = data;
+			roboCount = robotTweets.results.length;
+			twit.search('#vichargame #eye -RT', {}, function(err, data) {
+				eyeDone = true;
+				var eyeTweets = data;
+				eyeCount = eyeTweets.results.length;
+				console.log("Robot tweets as of " + curDate + " : " + roboCount);
+				gameState.web.twitter.activeVote.votes.lastRobot = roboCount;
+				console.log("Eye tweets as of " + curDate + " : " + eyeCount);
+				gameState.web.twitter.activeVote.votes.lastEye = eyeCount;
+				gameState.web.twitter.activeEffect = "none";
+				
+			});
+		});
+	}
 };
 
 var rockTheVote = function(){
@@ -106,10 +126,10 @@ var rockTheVote = function(){
 	
 	if(gameState.engine.gameRunning == true){
 		if(voteActive){
-			gameState.web.twitter.activeEffect = "none";
+			setTimeout(queryTwitter(true), 5000);
 		}
 		if(!voteActive){
-			setTimeout(queryTwitter, 5000);
+			setTimeout(queryTwitter(false), 5000);
 		}
 	}
 };
