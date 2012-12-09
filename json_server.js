@@ -28,7 +28,7 @@ function initGameState() {
 	var gameState = new Object()
 	gameState.engine = new Object()
 
-	gameState.engine.gameRunning = false
+	gameState.engine.gameRunning = true
 
 	gameState.engine.turrets = new Object()
 	gameState.engine.turretBullets = new Object()
