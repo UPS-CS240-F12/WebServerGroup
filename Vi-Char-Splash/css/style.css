@@ -16,10 +16,10 @@ h1, h2, h3, h4	{ text-align:center; font-family: 'Wire One', sans-serif; }
 h1				{ font-size:45px; margin:15px 0; clear:both; }
 h2				{ font-size:35px; }
 h3				{ font-size:25px; }
-h4				{ font-size:70px; }
+h4				{ font-size:90px; }
 ul li				{ margin-left:10px; }
 nav ul li			{ list-style-type:none; display:inline; }
-nav ul li a			{ font-size:45px; font-weight:bold; }
+nav ul li a			{ font-size:45px; font-weight:bold; text-decoration: none;}
 .about-sec		{ display:inline-block; margin:5px 8px; padding:15px; width:270px; background:#ccc; border-radius:50px 0; box-shadow: 0 0 15px black; min-height:160px; vertical-align:top; text-align:left;}
 .about-sec.credits	{ min-height:130px; text-align:center;}
 footer			{ text-align:center; font-style:italic; }
