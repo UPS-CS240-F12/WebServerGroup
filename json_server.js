@@ -60,6 +60,8 @@ function initGameState() {
 	gameState.web.twitter.activeVote.votes = new Object()
 	gameState.web.twitter.activeVote.votes.robot = 0
 	gameState.web.twitter.activeVote.votes.eye = 0
+	gameState.web.twitter.activeVote.votes.lastRobot = 0
+	gameState.web.twitter.activeVote.votes.lastEye = 0
 	return gameState
 }
 
@@ -82,12 +84,14 @@ var queryTwitter = function(){
 			var eyeTweets = data;
 			eyeCount = eyeTweets.results.length;
 			console.log("Robot tweets as of " + curDate + " : " + roboCount);
-			gameState.web.twitter.activeVote.votes.robot = roboCount;
+			gameState.web.twitter.activeVote.votes.robot = (roboCount - gameState.web.twitter.activeVote.votes.lastRobot);
+			gameState.web.twitter.activeVote.votes.lastRobot = roboCount;
 			console.log("Eye tweets as of " + curDate + " : " + eyeCount);
-			gameState.web.twitter.activeVote.votes.eye = eyeCount;
-			if(roboCount > eyeCount){
+			gameState.web.twitter.activeVote.votes.eye = (eyeCount - gameState.web.twitter.activeVote.votes.lastEye);
+			gameState.web.twitter.activeVote.votes.lastEye = eyeCount;
+			if(gameState.web.twitter.activeVote.votes.robot > gameState.web.twitter.activeVote.votes.eye){
 				gameState.web.twitter.activeEffect = "robotBuff";
-			}else if(roboCount < eyeCount){
+			}else if(gameState.web.twitter.activeVote.votes.robot < gameState.web.twitter.activeVote.votes.eye){
 				gameState.web.twitter.activeEffect = "eyeballBuff";
 			}else{
 				gameState.web.twitter.activeEffect = "none";
@@ -99,11 +103,14 @@ var queryTwitter = function(){
 var rockTheVote = function(){
 	voteActive = !voteActive;
 	gameState.web.twitter.activeVote.isActive = voteActive;
-	if(voteActive){
-		gameState.web.twitter.activeEffect = "none";
-	}
-	if(!voteActive){
-		setTimeout(queryTwitter, 5000);
+	
+	if(gameState.engine.gameRunning == true){
+		if(voteActive){
+			gameState.web.twitter.activeEffect = "none";
+		}
+		if(!voteActive){
+			setTimeout(queryTwitter, 5000);
+		}
 	}
 };
 
