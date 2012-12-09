@@ -69,7 +69,9 @@ var mainGameState = initGameState()
 var phoneSimState = initGameState()
 var gameSimState = initGameState()
 
-var queryTwitter = function(var isStart){
+var queryTwitter = function(startOrEnd){
+	
+	var isStart = startOrEnd;
 	var curDate = Date.now();
 	var roboCount = 0;
 	var eyeCount = 0;
