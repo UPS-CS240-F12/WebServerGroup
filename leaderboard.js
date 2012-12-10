@@ -68,7 +68,7 @@ module.exports.addLeaders = function(gameState, callback) {
 		var p_id = keys[i] //phone ID
 		var phone = phones[p_id]
 		var name = p_id
-		if (phone.name) name = phone.screenname
+		if (phone.screenname) name = phone.screenname
 		var score = 0
 		if (phone.score != undefined) score = phone.score
 		//Only add this phone's score to the DB if they scored over 0 points
