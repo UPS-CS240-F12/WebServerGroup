@@ -225,7 +225,10 @@ http.createServer(function(req, res) {
 			} 
 			catch(e) {//error in JSON parsin'
 				res.writeHead(400, { //invalid request
-					'Content-Type' : 'text/plain'
+					'Content-Type' : 'text/plain',
+					'Access-Control-Allow-Origin' : '*',
+					'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+					'Access-Control-Allow-Headers' : 'Content-Type, X-Requested-With, X-PINGOTHER'
 				});
 				res.end("Failed to parse JSON data! We recieved: \n\n"+body);
 			}
