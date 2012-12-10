@@ -16,7 +16,7 @@ h1, h2, h3, h4	{ text-align:center; font-family: 'Wire One', sans-serif; }
 h1				{ font-size:45px; margin:15px 0; clear:both; }
 h2				{ font-size:35px; }
 h3				{ font-size:25px; }
-h4				{ font-size:90px; color:GreenYellow}
+h4				{ font-size:90px; }
 ul li				{ margin-left:10px; }
 nav ul li			{ list-style-type:none; display:inline; }
 nav ul li a			{ font-size:45px; font-weight:bold; text-decoration: none; color:GreenYellow;}
@@ -35,8 +35,8 @@ input				{ color:#000; }
 
 .sorting		{ color:#fff; }
 
-.tweets			{ display:inline-block; background:#ccc; position:relative; top:20px; width:435px; min-height:250px; padding:15px; border-radius:25px; margin-left:50px; box-shadow: 0 8px 6px -3px #666; }
-.tweets:after 	{ content:""; position:absolute; border-width:20px 0px 0px 57px; border-style:solid; border-color:#CCC transparent; display:block; width:0; top:165px; left:-50px; }
+.tweets			{ display:inline-block; background:#ccc; position:relative; top:20px; width:435px; padding:15px; border-radius:25px; margin-left:50px; box-shadow: 0 8px 6px -3px #666; }
+.tweets:after 	{ content:""; position:absolute; border-width:20px 0px 0px 57px; border-style:solid; border-color:#CCC transparent; display:block; width:0; top:150px; left:-50px; }
 .tweet-txt		{ text-align:left; }
 .tweet-attr		{ text-align:right; font-style:italic; margin-bottom:8px; }
 
