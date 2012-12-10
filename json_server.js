@@ -231,7 +231,10 @@ http.createServer(function(req, res) {
 			}
 			merge(gameState, parsed)
 			res.writeHead(200, {
-				'Content-Type' : 'application/json'
+				'Content-Type' : 'application/json',
+				'Access-Control-Allow-Origin' : '*',
+				'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS',
+				'Access-Control-Allow-Headers' : 'Content-Type, X-Requested-With, X-PINGOTHER'
 			});
 			res.write(JSON.stringify(gameState));
 			res.end();
