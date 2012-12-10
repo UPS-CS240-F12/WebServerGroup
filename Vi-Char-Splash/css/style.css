@@ -16,7 +16,7 @@ h1, h2, h3, h4	{ text-align:center; font-family: 'Wire One', sans-serif; }
 h1				{ font-size:45px; margin:15px 0; clear:both; }
 h2				{ font-size:35px; }
 h3				{ font-size:25px; }
-h4				{ font-size:90px; }
+h4				{ font-size:90px; color:GreenYellow}
 ul li				{ margin-left:10px; }
 nav ul li			{ list-style-type:none; display:inline; }
 nav ul li a			{ font-size:45px; font-weight:bold; text-decoration: none; color:GreenYellow;}
