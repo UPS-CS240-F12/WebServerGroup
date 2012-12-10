@@ -68,19 +68,28 @@ module.exports.addLeaders = function(gameState, callback) {
 		var p_id = keys[i] //phone ID
 		var phone = phones[p_id]
 		var name = p_id
-		if (phone.name) name = phone.name
+		if (phone.name) name = phone.screenname
 		var score = 0
 		if (phone.score != undefined) score = phone.score
-		scoreList.push({type : "phone", phoneid : p_id, name : name, score : score})
+		//Only add this phone's score to the DB if they scored over 0 points
+		if(score > 0){
+			scoreList.push({type : "phone", phoneid : p_id, name : name, score : score})
+		}
 	}
 	var engine = gameState.engine
 	var botScore = 0
 	var botName = "NoName Robot"
-	if (engine.score) botScore = engine.score
-	if (engine.name) botName = engine.name
-	scoreList.push({type : "bot", name : botName, score : botScore})
-	lb_collection.insert(scoreList, {safe: true}, function(err, records){
-		if (err) return callback(err)
-		callback(null)
-	})
+	if (engine.player.score) botScore = engine.player.score
+	if (engine.player.screenname) botName = engine.player.screenname
+	//Only add this bot's score to the DB if they scored over 0 points
+	if(botScore > 0){
+		scoreList.push({type : "bot", name : botName, score : botScore})
+	}
+	//Only insert the score list if there are values in it
+	if(scoreList.length > 0){
+		lb_collection.insert(scoreList, {safe: true}, function(err, records){
+			if (err) return callback(err)
+			callback(null)
+		})
+	}
 }
